@@ -1,13 +1,6 @@
-export interface User {
-  id: string;
-  name: string;
-  surname: string;
-  nationality: string;
-  dateOfBirth: string; // ISO format
-  dateCreated: string; // ISO format
-}
-
 import { KafkaProducer } from './KafkaProducer';
+import { Logger } from '../common/utils/Logger';
+import { IUser } from './interfaces/IUser';
 
 export class UserService {
     
@@ -17,17 +10,32 @@ export class UserService {
     this.producer = producer;
   }
 
-  async createUser(userData: Omit<User, 'id' | 'dateCreated'>): Promise<User> {
-    const user: User = {
-      id: this.generateId(),
-      ...userData,
-      dateCreated: new Date().toISOString(),
-    };
-    await this.producer.sendMessage({ event: 'user_created', user });
-    return user;
+  async createUser(userData: Omit<IUser, 'id' | 'dateCreated'>): Promise<IUser> {
+    try {
+      const user: IUser = {
+        id: this.generateId(),
+        ...userData,
+        dateCreated: new Date(),
+      };
+      await this.producer.sendMessage({ event: 'user_created', user: this.serializeUser(user) });
+      Logger.info('User created and event emitted:', user);
+      return user;
+    } catch (error) {
+      Logger.error('Failed to create user or emit event:', error);
+      throw error;
+    }
   }
 
   private generateId(): string {
     return Math.random().toString(36).substr(2, 9);
+  }
+
+  // Helper to serialize User for transport (convert Date to ISO string)
+  private serializeUser(user: IUser): any {
+    return {
+      ...user,
+      dateOfBirth: user.dateOfBirth.toISOString(),
+      dateCreated: user.dateCreated.toISOString(),
+    };
   }
 }

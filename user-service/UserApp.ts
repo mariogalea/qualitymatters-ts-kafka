@@ -1,5 +1,6 @@
 import { KafkaProducer } from './KafkaProducer';
-import { UserService, User } from './UserService';
+import { UserService } from './UserService';
+import { IUser } from './interfaces/IUser';
 
 export class UserApp {
 
@@ -19,10 +20,10 @@ export class UserApp {
       name: 'Mario',
       surname: 'Galea',
       nationality: 'Maltese',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'), // Pass as Date object
     };
 
-    const newUser: User = await this.userService.createUser(userData);
+    const newUser: IUser = await this.userService.createUser(userData);
 
     await this.producer.disconnect();
   }
