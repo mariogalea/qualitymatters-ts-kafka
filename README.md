@@ -6,6 +6,8 @@ This project demonstrates a simple microservice architecture using TypeScript an
 
 1. **user-service**
    - Emits `user_created` events to Kafka.
+   - Uses OOP with TypeScript classes for user and Kafka logic.
+   - User fields: `id`, `name`, `surname`, `nationality`, `dateOfBirth`, `dateCreated`.
 
 2. **order-service**
    - Listens for `user_created` events from Kafka.
@@ -20,7 +22,9 @@ This project demonstrates a simple microservice architecture using TypeScript an
 ```
 qualitymatters-ts-kafka/
 ├── user-service/
-│   └── index.ts
+│   ├── index.ts
+│   ├── UserService.ts
+│   └── KafkaProducer.ts
 ├── order-service/
 │   └── index.ts
 ├── email-service/
@@ -30,9 +34,16 @@ qualitymatters-ts-kafka/
 
 ## Getting Started
 
-1. Install dependencies (TypeScript, kafkajs, etc.)
-2. Configure Kafka connection for each service.
-3. Run each service independently to see event-driven communication.
+1. Install dependencies:
+   ```sh
+   npm install
+   ```
+2. Transpile TypeScript to JavaScript:
+   ```sh
+   npx tsc
+   ```
+3. Configure Kafka connection for each service as needed.
+4. Run each service independently to see event-driven communication.
 
 ## Requirements
 - Node.js
