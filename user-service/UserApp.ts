@@ -12,7 +12,9 @@ export class UserApp {
   }
 
   async run() {
+
     await this.producer.connect();
+
     const userData = {
       name: 'Mario',
       surname: 'Galea',
@@ -21,8 +23,7 @@ export class UserApp {
     };
 
     const newUser: User = await this.userService.createUser(userData);
-    
-    console.log('User created and event emitted:', newUser);
+
     await this.producer.disconnect();
   }
 
