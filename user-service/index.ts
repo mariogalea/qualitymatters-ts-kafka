@@ -1,6 +1,6 @@
 import { UserApp } from './UserApp';
 
-const broker = 'localhost:9092'; // Change if needed
+const broker = 'localhost:9092';
 const topic = 'user_created';
 
 const app = new UserApp(broker, topic);

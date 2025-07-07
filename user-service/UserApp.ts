@@ -25,7 +25,9 @@ export class UserApp {
 
     const newUser: IUser = await this.userService.createUser(userData);
 
-    await this.producer.disconnect();
+    // Keep the service running
+    console.log('User service is running. Press Ctrl+C to exit.');
+    process.stdin.resume(); // Prevent Node.js from exiting
   }
 
 }
