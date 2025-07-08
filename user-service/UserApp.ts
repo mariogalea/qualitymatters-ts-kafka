@@ -20,14 +20,15 @@ export class UserApp {
       name: 'Mario',
       surname: 'Galea',
       nationality: 'Maltese',
-      dateOfBirth: new Date('1990-01-01'), // Pass as Date object
+      dateOfBirth: new Date('1984-06-01'), 
     };
 
     const newUser: IUser = await this.userService.createUser(userData);
 
     // Keep the service running
     console.log('User service is running. Press Ctrl+C to exit.');
-    process.stdin.resume(); // Prevent Node.js from exiting
+    // Prevent Node.js from exiting
+    process.stdin.resume(); 
   }
 
 }

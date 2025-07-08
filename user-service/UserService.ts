@@ -17,7 +17,7 @@ export class UserService {
         ...userData,
         dateCreated: new Date(),
       };
-      await this.producer.sendMessage({ event: 'user_created', user: this.serializeUser(user) });
+      await this.producer.sendMessage({ event: 'usercreated', user: this.serializeUser(user) });
       Logger.info('User created and event emitted:', user);
       return user;
     } catch (error) {
