@@ -6,6 +6,7 @@
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
     "start-userservice": "node dist/user-service/index.js",
+    "start-orderservice": "node dist/order-service/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

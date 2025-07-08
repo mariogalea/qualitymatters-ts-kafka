@@ -5,16 +5,15 @@ This project demonstrates a simple microservice architecture using TypeScript an
 ## Microservices
 
 1. **user-service**
-   - Emits `user_created` events to Kafka.
-   - Uses OOP with TypeScript classes for user and Kafka logic.
+   - Emits `usercreated` events to Kafka for 12 times.
    - User fields: `id`, `name`, `surname`, `nationality`, `dateOfBirth` (Date), `dateCreated` (Date).
 
 2. **order-service**
-   - Listens for `user_created` events from Kafka.
-   - Emits `order_created` events to Kafka.
+   - Listens for `usercreated` events from Kafka.
+   - Emits `ordercreated` events to Kafka.
 
 3. **email-service**
-   - Listens for `order_created` events from Kafka.
+   - Listens for `ordercreated` events from Kafka.
    - Simulates sending an email when an order is created.
 
 ## Structure
