@@ -8,6 +8,8 @@
     "start": "npm run build && npm run start-userservice && npm run start-orderservice",
     "start-userservice": "node dist/user-service/index.js",
     "start-orderservice": "node dist/order-service/index.js",
+    "start-emailservice": "node dist/email-service/index.js",
+
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
