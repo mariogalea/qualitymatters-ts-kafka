@@ -38,6 +38,10 @@ qualitymatters-ts-kafka/
 │   ├── KafkaConsumer.ts
 │   └── interfaces/
 │       └── IOrder.ts
+├── email-service/
+│   ├── index.ts
+│   ├── EmailApp.ts
+│   ├── KafkaConsumer.ts
 └── ...
 ```
 
