@@ -29,6 +29,8 @@ export class KafkaConsumer {
         await this.consumer.subscribe({ topic: this.topic, fromBeginning: false });
         await this.consumer.run({
             eachMessage: async ({ message }) => {
+                Logger.debug(`Received message from topic '${this.topic}': ${message.value?.toString()}`);
+                // Parse the message value and pass it to the onMessage handler
                 if (message.value) {
                 await onMessage(JSON.parse(message.value.toString()));
                 }
