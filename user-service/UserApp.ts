@@ -21,8 +21,8 @@ export class UserApp {
       await this.producer.connect();
       Logger.debug('Connected to Kafka broker.');
       let count = 0;
-      // 1 minute / 5 seconds = 12 users
-      const maxUsers = 12; 
+
+      const maxUsers = 60; 
 
       const interval = setInterval(async () => {
           if (count >= maxUsers) {
