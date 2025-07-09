@@ -20,11 +20,19 @@ export class OrderService {
             dateCreated: new Date(),
         };
 
-        await this.producer.sendMessage({ event: 'ordercreated', order });
+        await this.producer.sendMessage({ event: 'ordercreated', order: this.serializeOrder(order) });
         
         Logger.info('Order created and event emitted:', order);
         
         return order;
     
+    }
+
+    // Helper to serialize Order for transport (convert Date to ISO string)
+    private serializeOrder(order: IOrder): any {
+        return {
+            ...order,
+            dateCreated: order.dateCreated.toISOString(),
+        };
     }
 }
