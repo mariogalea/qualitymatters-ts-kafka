@@ -1,3 +1,9 @@
-// email-service: listens for order_created, simulates sending of email
+import { EmailApp } from './EmailApp';
 
-console.log('Email Service started. Will listen for order_created and simulate sending emails.');
+const broker = 'localhost:9092';
+const orderTopic = 'ordercreated';
+
+// Initialize the EmailApp with the Kafka broker and order topic
+// This app will consume messages from the 'ordercreated' topic and simulate sending emails
+const app = new EmailApp(broker, orderTopic);
+app.run().catch(console.error);
