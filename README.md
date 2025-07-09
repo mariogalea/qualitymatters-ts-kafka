@@ -58,6 +58,7 @@ qualitymatters-ts-kafka/
      -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 ^
      -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 ^
      -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 ^
+     -e OFFSETS_TOPIC_REPLICATION_FACTOR=1 ^
      confluentinc/cp-kafka:7.5.3
    ```
 
@@ -113,6 +114,18 @@ qualitymatters-ts-kafka/
   ```sh
   docker logs kafka
   docker
+  ```
+
+- **The group coordinator is not available**  
+  Create __consumer_offsets manually via:
+  ```sh
+  docker exec kafka kafka-topics --create --topic __consumer_offsets --bootstrap-server localhost:9092 --partitions 50 --replication-factor 1 --config cleanup.policy=compact
+  ```
+  
+  Check with:
+  ```sh
+  docker exec kafka kafka-topics --describe --topic __consumer_offsets --bootstrap-server localhost:9092
+  ```
 
 ## Requirements
 - Node.js

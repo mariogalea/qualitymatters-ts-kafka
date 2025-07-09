@@ -20,7 +20,13 @@ export class KafkaConsumer {
     async subscribe(onMessage: (message: any) => Promise<void>) {
 
         Logger.debug(`Subscribing to topic '${this.topic}'`);
-        await this.consumer.subscribe({ topic: this.topic, fromBeginning: true });
+        
+        if (!this.consumer.connect()) {
+            Logger.warn(`Consumer is not connected. Attempting to connect to topic '${this.topic}'`);
+            await this.connect();
+        }
+
+        await this.consumer.subscribe({ topic: this.topic, fromBeginning: false });
         await this.consumer.run({
             eachMessage: async ({ message }) => {
                 if (message.value) {
